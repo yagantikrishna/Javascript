@@ -17,6 +17,17 @@ const output=users.reduce(function(acc,curr){
 
 console.log(output);
 
+//using reduce to print firstname of all users whose age is less than 30
+const output4=users.reduce(function(acc,curr){
+    //console.log(curr.age<30);
+    if(curr.age<30){
+        acc[curr.firstName]=curr.age;
+        }
+    return acc;
+},{})
+
+console.log(output4);
+
 //using map to combine firstName and lastName
 //map={Sai Krishna, Vinod Kumar, Gopi Chand}
 
