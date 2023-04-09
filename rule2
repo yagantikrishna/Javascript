@@ -1,0 +1,500 @@
+/*
+   YARA Rule Set
+   Author: Anonymous_Crawlers
+   Date: 2023-04-09
+   Identifier: njRAT-v0.6.4
+   Reference: yararulegen
+*/
+
+/* Rule Set ----------------------------------------------------------------- */
+
+rule _home_kali_yara_njRAT_v0_6_4_stub {
+   meta:
+      description = "njRAT-v0.6.4 - file stub.il"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "a1b65f18c7e882b1606a4ef9387d8988e6fd755d7d03214b677ad528a487d73a"
+   strings:
+      $x1 = "      IL_0118:  ldstr      \"cmd.exe /c ping 127.0.0.1 & del \\\"\"" fullword ascii
+      $x2 = "  .method public static pinvokeimpl(\"user32.dll\" as \"GetWindowTextA\" nomangle ansi lasterr winapi) " fullword ascii
+      $x3 = "  .method public static pinvokeimpl(\"user32.dll\" as \"GetWindowTextLengthA\" nomangle ansi lasterr winapi) " fullword ascii
+      $s4 = "  .method private static pinvokeimpl(\"user32.dll\" winapi) " fullword ascii
+      $s5 = "  .method public static pinvokeimpl(\"user32.dll\" nomangle ansi lasterr winapi) " fullword ascii
+      $s6 = "  .method private static pinvokeimpl(\"user32.dll\" nomangle ansi lasterr winapi) " fullword ascii
+      $s7 = "vices.RegistryProxy::get_Users()" fullword ascii
+      $s8 = ".module extern user32.dll" fullword ascii
+      $s9 = "      IL_08ae:  callvirt   instance void [System]System.Diagnostics.ProcessStartInfo::set_UseShellExecute(bool)" fullword ascii
+      $s10 = "  .method private static pinvokeimpl(\"kernel32\" as \"GetVolumeInformationA\" nomangle ansi lasterr winapi) " fullword ascii
+      $s11 = "yServices.RegistryProxy::get_CurrentUser()" fullword ascii
+      $s12 = "      IL_0857:  ldstr      \"cmd.exe\"" fullword ascii
+      $s13 = "  .method public static pinvokeimpl(\"avicap32.dll\" nomangle ansi lasterr winapi) " fullword ascii
+      $s14 = "iagnostics.ProcessWindowStyle)" fullword ascii
+      $s15 = "ervices.RegistryProxy::get_CurrentUser()" fullword ascii
+      $s16 = "vices.RegistryProxy::get_CurrentUser()" fullword ascii
+      $s17 = "  .custom instance void [mscorlib]System.Runtime.CompilerServices.RuntimeCompatibilityAttribute::.ctor() = ( 01 00 01 00 54 02 1" ascii
+      $s18 = "  .custom instance void [mscorlib]System.Runtime.CompilerServices.CompilationRelaxationsAttribute::.ctor(int32) = ( 01 00 08 00 " ascii
+      $s19 = "  .field public static class [mscorlib]System.Threading.Mutex MT" fullword ascii
+      $s20 = "  .custom instance void [mscorlib]System.Runtime.CompilerServices.CompilationRelaxationsAttribute::.ctor(int32) = ( 01 00 08 00 " ascii
+   condition:
+      uint16(0) == 0x0a0d and filesize < 900KB and
+      1 of ($x*) and 4 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Stub {
+   meta:
+      description = "njRAT-v0.6.4 - file Stub.manifest"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "835a00d6e7c43db49ae7b3fa12559f23c2920b7530f4d3f960fd285b42b1efb5"
+   strings:
+      $s1 = "        <requestedExecutionLevel level=\"asInvoker\" uiAccess=\"false\"/>" fullword ascii
+      $s2 = "  <assemblyIdentity version=\"1.0.0.0\" name=\"MyApplication.app\"/>" fullword ascii
+      $s3 = "  <trustInfo xmlns=\"urn:schemas-microsoft-com:asm.v2\">" fullword ascii
+      $s4 = "      <requestedPrivileges xmlns=\"urn:schemas-microsoft-com:asm.v3\">" fullword ascii
+      $s5 = "  </trustInfo>" fullword ascii
+      $s6 = "      </requestedPrivileges>" fullword ascii
+   condition:
+      uint16(0) == 0x3f3c and filesize < 1KB and
+      all of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_njRAT {
+   meta:
+      description = "njRAT-v0.6.4 - file njRAT.exe"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "fd624aa205517580e83fad7a4ce4d64863e95f62b34ac72647b1974a52822199"
+   strings:
+      $x1 = "cmd.exe /c ping 127.0.0.1 & del \"" fullword wide
+      $x2 = "C:\\Users\\algha_000\\AppData\\Local\\Temporary Projects\\EnKSaR.HaCKeR\\obj\\x86\\Release\\EnKSaR.HaCKeR.pdb" fullword ascii
+      $s3 = "lSystem.Resources.ResourceReader, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089#System.Resources.R" ascii
+      $s4 = "System.Windows.Forms.ImageListStreamer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089B" ascii
+      $s5 = "fSystem.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3ahSystem.Drawing.Bitmap, S" ascii
+      $s6 = "System.Windows.Forms.ImageListStreamer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089P" ascii
+      $s7 = "njRAT.exe" fullword wide
+      $s8 = "System.Windows.Forms.ImageListStreamer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089P" ascii
+      $s9 = "System.Windows.Forms.ImageListStreamer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089B" ascii
+      $s10 = "lSystem.Resources.ResourceReader, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089#System.Resources.R" ascii
+      $s11 = "fSystem.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3ahSystem.Drawing.Bitmap, S" ascii
+      $s12 = "Execute ERROR" fullword wide
+      $s13 = "  <!-- Enable themes for Windows common controls and dialogs (Windows XP and later) -->" fullword ascii
+      $s14 = "ystem.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3aPADPADPBj" fullword ascii
+      $s15 = "ystem.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" fullword ascii
+      $s16 = "ystem.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3aPADPADP" fullword ascii
+      $s17 = "njRAT.script.resources" fullword ascii
+      $s18 = "EnKSaR.HaCKeR.exe" fullword wide
+      $s19 = "\\njRAT.exe" fullword wide
+      $s20 = "GetPasswordsToolStripMenuItem.Image" fullword wide
+   condition:
+      uint16(0) == 0x5a4d and filesize < 3000KB and
+      1 of ($x*) and 4 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_GeoIP {
+   meta:
+      description = "njRAT-v0.6.4 - file GeoIP.dat"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "8a0675001b5bc63d8389fc7ed80b4a7b0f9538c744350f00162533519e106426"
+   strings:
+      $s1 = "GEO-106FREE 20130402 Build 1 Copyright (c) 2012 MaxMind Inc All Rights Reserved" fullword ascii
+   condition:
+      uint16(0) == 0x0001 and filesize < 4000KB and
+      all of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_NAudio {
+   meta:
+      description = "njRAT-v0.6.4 - file NAudio.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "cd9709bf1c7396f6fe3684b5177fa0890c706ca82e2b98ba58e8d8383632a3c8"
+   strings:
+      $x1 = "C:\\Users\\Mark\\Code\\CodePlex\\naudio\\NAudio\\obj\\Debug\\NAudio.pdb" fullword ascii
+      $x2 = "jSystem.CodeDom.MemberAttributes, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089fSystem.Drawing.Size," ascii
+      $s3 = "System.Security.Permissions.SecurityPermissionAttribute, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934" ascii
+      $s4 = "lSystem.Resources.ResourceReader, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089#System.Resources.R" ascii
+      $s5 = " System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3amSystem.Globalization.CultureInfo, mscorlib, V" ascii
+      $s6 = "ersion=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089PADPADP" fullword ascii
+      $s7 = " System.Globalization.CompareInfo" fullword ascii
+      $s8 = "have not implemented not accepting logic yet" fullword wide
+      $s9 = "ResamplerDmoStream.Read: No output data available" fullword wide
+      $s10 = " System.Globalization.CultureInfo" fullword ascii
+      $s11 = "<PrivateImplementationDetails>{4ADC0EA0-0446-48CF-8E3D-7A238EE8575A}" fullword ascii
+      $s12 = "Exporting a track with a missing end track" fullword wide
+      $s13 = "WaveFormatConversionStream was not disposed" fullword wide
+      $s14 = "MP3 File Reader read too much" fullword wide
+      $s15 = "Buffers already queued on play" fullword wide
+      $s16 = "WaveOut device was not closed" fullword wide
+      $s17 = "WaveFileReader was not disposed" fullword wide
+      $s18 = "WaveOutEvent device was not closed" fullword wide
+      $s19 = "AiffFileReader was not disposed" fullword wide
+      $s20 = "Adding a buffer that was already queued on play" fullword wide
+   condition:
+      uint16(0) == 0x5a4d and filesize < 1000KB and
+      1 of ($x*) and 4 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Plugin_Mic {
+   meta:
+      description = "njRAT-v0.6.4 - file Mic.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "fde583027a692d210e8f1f73667fa0037705128ade8bbfbc9b780f019ead6672"
+   strings:
+      $x1 = "jSystem.CodeDom.MemberAttributes, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089fSystem.Drawing.Size," ascii
+      $s2 = "lSystem.Resources.ResourceReader, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089#System.Resources.R" ascii
+      $s3 = " System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3amSystem.Globalization.CultureInfo, mscorlib, V" ascii
+      $s4 = "MIC.dll" fullword ascii
+      $s5 = "ersion=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089PADPADP" fullword ascii
+      $s6 = " System.Globalization.CompareInfo" fullword ascii
+      $s7 = "have not implemented not accepting logic yet" fullword wide
+      $s8 = "ResamplerDmoStream.Read: No output data available" fullword wide
+      $s9 = " System.Globalization.CultureInfo" fullword ascii
+      $s10 = "<PrivateImplementationDetails>{4ADC0EA0-0446-48CF-8E3D-7A238EE8575A}" fullword ascii
+      $s11 = "Exporting a track with a missing end track" fullword wide
+      $s12 = "WaveFormatConversionStream was not disposed" fullword wide
+      $s13 = "MP3 File Reader read too much" fullword wide
+      $s14 = "Buffers already queued on play" fullword wide
+      $s15 = "WaveOut device was not closed" fullword wide
+      $s16 = "WaveFileReader was not disposed" fullword wide
+      $s17 = "WaveOutEvent device was not closed" fullword wide
+      $s18 = "AiffFileReader was not disposed" fullword wide
+      $s19 = "Adding a buffer that was already queued on play" fullword wide
+      $s20 = "Invalid SamplesTotalSize vs SamplesFrameSize" fullword wide
+   condition:
+      uint16(0) == 0x5a4d and filesize < 1000KB and
+      1 of ($x*) and 4 of them
+}
+
+rule Mono_Cecil {
+   meta:
+      description = "njRAT-v0.6.4 - file Mono.Cecil.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "cdadc26c09f869e21053ee1a0acf3b2d11df8edd599fe9c377bd4d3ce1c9cda9"
+   strings:
+      $x1 = "C:\\Users\\njq8\\Desktop\\jbevain-cecil-0.9.5-73-ga5ffcc0\\jbevain-cecil-a5ffcc0\\obj\\net_2_0_Debug\\Mono.Cecil.pdb" fullword ascii
+      $s2 = "ZMono.Cecil.Pdb, PublicKey=002400000480000094000000060200000024000052534131000400000100010079159977d2d03a8e6bea7a2e74e8d1afcc93e" ascii
+      $s3 = "ZMono.Cecil.Mdb, PublicKey=002400000480000094000000060200000024000052534131000400000100010079159977d2d03a8e6bea7a2e74e8d1afcc93e" ascii
+      $s4 = "0100010079159977d2d03a8e6bea7a2e74e8d1afcc93e8851974952bb480a12c9134474d04062447c37e0e68c080536fcf3c3fbe2ff9c979ce998475e506e8ce" ascii
+      $s5 = "\\Mono.Cecil.Tests, PublicKey=002400000480000094000000060200000024000052534131000400000100010079159977d2d03a8e6bea7a2e74e8d1afcc" ascii
+      $s6 = "3e8851974952bb480a12c9134474d04062447c37e0e68c080536fcf3c3fbe2ff9c979ce998475e506e8ce82dd5b0f350dc10e93bf2eeecf874b24770c5081dbe" ascii
+      $s7 = "\\Mono.Cecil.Rocks, PublicKey=002400000480000094000000060200000024000052534131000400000100010079159977d2d03a8e6bea7a2e74e8d1afcc" ascii
+      $s8 = "8851974952bb480a12c9134474d04062447c37e0e68c080536fcf3c3fbe2ff9c979ce998475e506e8ce82dd5b0f350dc10e93bf2eeecf874b24770c5081dbea7" ascii
+      $s9 = "<GetMarshalInfo>b__7" fullword ascii
+      $s10 = "<GetHasGenericParameters>b__f" fullword ascii
+      $s11 = " 2008 - 2011 Jb Evain" fullword wide
+      $s12 = "<GetGenericParameters>b__11" fullword ascii
+      $s13 = "<GetSecurityDeclarations>b__3" fullword ascii
+      $s14 = "<GetHasMarshalInfo>b__5" fullword ascii
+      $s15 = "<GetHasSecurityDeclarations>b__1" fullword ascii
+      $s16 = "<GetCustomAttributes>b__b" fullword ascii
+      $s17 = "<GetHasCustomAttributes>b__9" fullword ascii
+      $s18 = "<PrivateImplementationDetails>{9A34808A-0AAB-48C3-B6EB-B09FA5526477}" fullword ascii
+      $s19 = "<LookupType>b__0" fullword ascii
+      $s20 = "resolved" fullword ascii /* Goodware String - occured 33 times */
+   condition:
+      uint16(0) == 0x5a4d and filesize < 900KB and
+      1 of ($x*) and 4 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Plugin_cam {
+   meta:
+      description = "njRAT-v0.6.4 - file cam.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "b02c56d29447690cdafd8f2f6877d526d1f6efcaae74017719c460d9b3ee38b8"
+   strings:
+      $s1 = "cam.dll" fullword ascii
+      $s2 = "getTempFilename" fullword ascii
+      $s3 = "pTargetFormat" fullword ascii
+      $s4 = "get_VideoCompressor" fullword ascii
+      $s5 = "getStreamConfigSetting" fullword ascii
+      $s6 = "IAMVfwCompressDialogs" fullword ascii
+      $s7 = "AMGetErrorText" fullword ascii
+      $s8 = "VfwCompressDialogs" fullword ascii
+      $s9 = "compressDialogs" fullword ascii
+      $s10 = "get_NumInputConnections" fullword ascii
+      $s11 = "vfwCompressDialogs" fullword ascii
+      $s12 = "get_AudioCompressor" fullword ascii
+      $s13 = "temporalCompression" fullword ascii
+      $s14 = "VideoInfoHeader2" fullword ascii
+      $s15 = "get_Loudness" fullword ascii
+      $s16 = "get_AudioChannels" fullword ascii
+      $s17 = "GetMinIdealImageSize" fullword ascii
+      $s18 = "GetRenderingPrefs" fullword ascii
+      $s19 = "ShowTunerPinDialog" fullword ascii
+      $s20 = "GetNativeVideoSize" fullword ascii
+   condition:
+      uint16(0) == 0x5a4d and filesize < 200KB and
+      8 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Plugin_sc2 {
+   meta:
+      description = "njRAT-v0.6.4 - file sc2.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "d3dcb25f9004f6fce3f3d94406ad6845d996cda2f106a203082aed39a84fac4e"
+   strings:
+      $s1 = "sc2.dll" fullword wide
+      $s2 = "getMD5Hash" fullword ascii
+      $s3 = "CompareString" fullword ascii /* Goodware String - occured 28 times */
+      $s4 = "TcpClient" fullword ascii /* Goodware String - occured 30 times */
+      $s5 = "MD5CryptoServiceProvider" fullword ascii /* Goodware String - occured 50 times */
+      $s6 = "Microsoft.VisualBasic" fullword ascii /* Goodware String - occured 98 times */
+      $s7 = "Socket" fullword ascii /* Goodware String - occured 140 times */
+      $s8 = "System.Net.Sockets" fullword ascii /* Goodware String - occured 149 times */
+      $s9 = "ComputeHash" fullword ascii /* Goodware String - occured 226 times */
+      $s10 = "Disconnect" fullword ascii /* Goodware String - occured 275 times */
+      $s11 = "System.Security.Cryptography" fullword ascii /* Goodware String - occured 305 times */
+      $s12 = "MemoryStream" fullword ascii /* Goodware String - occured 420 times */
+      $s13 = "Connect" fullword ascii /* Goodware String - occured 451 times */
+      $s14 = "Encoding" fullword ascii /* Goodware String - occured 809 times */
+      $s15 = "wMapType" fullword ascii
+      $s16 = "Monitor" fullword ascii /* Goodware String - occured 1015 times */
+      $s17 = "System.Runtime.CompilerServices" fullword ascii /* Goodware String - occured 1950 times */
+      $s18 = "System" fullword ascii /* Goodware String - occured 2567 times */
+      $s19 = "CaptureScreen" fullword ascii /* Goodware String - occured 3 times */
+      $s20 = "[endof]" fullword wide
+   condition:
+      uint16(0) == 0x5a4d and filesize < 30KB and
+      8 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Plugin_fm {
+   meta:
+      description = "njRAT-v0.6.4 - file fm.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "f132324acf09c0562a1cad1288bfb4021bd991659126d21ecb9499938bf6acb3"
+   strings:
+      $s1 = "FM.dll" fullword ascii
+      $s2 = "programdata" fullword wide
+      $s3 = "userprofile" fullword wide /* Goodware String - occured 3 times */
+      $s4 = "CompareString" fullword ascii /* Goodware String - occured 28 times */
+      $s5 = "TcpClient" fullword ascii /* Goodware String - occured 30 times */
+      $s6 = "appdata" fullword wide /* Goodware String - occured 37 times */
+      $s7 = "windir" fullword wide /* Goodware String - occured 85 times */
+      $s8 = "Microsoft.VisualBasic" fullword ascii /* Goodware String - occured 98 times */
+      $s9 = "Socket" fullword ascii /* Goodware String - occured 140 times */
+      $s10 = "System.Net.Sockets" fullword ascii /* Goodware String - occured 149 times */
+      $s11 = "Disconnect" fullword ascii /* Goodware String - occured 275 times */
+      $s12 = "MemoryStream" fullword ascii /* Goodware String - occured 420 times */
+      $s13 = "Connect" fullword ascii /* Goodware String - occured 451 times */
+      $s14 = "Process" fullword ascii /* Goodware String - occured 571 times */
+      $s15 = "Encoding" fullword ascii /* Goodware String - occured 809 times */
+      $s16 = "_Lambda$__1" fullword ascii
+      $s17 = "Monitor" fullword ascii /* Goodware String - occured 1015 times */
+      $s18 = "Delete" fullword ascii /* Goodware String - occured 1948 times */
+      $s19 = "System.Runtime.CompilerServices" fullword ascii /* Goodware String - occured 1950 times */
+      $s20 = "programfiles" fullword wide /* Goodware String - occured 2 times */
+   condition:
+      uint16(0) == 0x5a4d and filesize < 40KB and
+      8 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Plugin_ch {
+   meta:
+      description = "njRAT-v0.6.4 - file ch.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "89a1bbe42cde01ddfe531d69dd6ea6575296096010400cb63cbf4999eca52e52"
+   strings:
+      $s1 = "lSystem.Resources.ResourceReader, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089#System.Resources.R" ascii
+      $s2 = "ch.dll" fullword ascii
+      $s3 = "T2_KeyDown" fullword ascii
+      $s4 = "get_T2" fullword ascii
+      $s5 = "get_T1" fullword ascii
+      $s6 = "CompareString" fullword ascii /* Goodware String - occured 28 times */
+      $s7 = "TcpClient" fullword ascii /* Goodware String - occured 30 times */
+      $s8 = "Microsoft.VisualBasic" fullword ascii /* Goodware String - occured 98 times */
+      $s9 = "Socket" fullword ascii /* Goodware String - occured 140 times */
+      $s10 = "System.Net.Sockets" fullword ascii /* Goodware String - occured 149 times */
+      $s11 = "Disconnect" fullword ascii /* Goodware String - occured 275 times */
+      $s12 = "MemoryStream" fullword ascii /* Goodware String - occured 420 times */
+      $s13 = "Connect" fullword ascii /* Goodware String - occured 451 times */
+      $s14 = "Process" fullword ascii /* Goodware String - occured 571 times */
+      $s15 = "Encoding" fullword ascii /* Goodware String - occured 809 times */
+      $s16 = "sender" fullword ascii /* Goodware String - occured 960 times */
+      $s17 = "untimeResourceSet" fullword ascii
+      $s18 = "_Lambda$__1" fullword ascii
+      $s19 = "Button1_Click" fullword ascii
+      $s20 = "ch.C.resources" fullword ascii
+   condition:
+      uint16(0) == 0x5a4d and filesize < 40KB and
+      8 of them
+}
+
+rule _home_kali_yara_njRAT_v0_6_4_Plugin_pw {
+   meta:
+      description = "njRAT-v0.6.4 - file pw.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "a3e4bee1b6944aa9266bd58de3f534a4c1896df621881a5252a0d355a6e67c70"
+   strings:
+      $s1 = "http://www.oovoo.com/?Encrypted Password" fullword wide
+      $s2 = "mozutils.dll" fullword wide
+      $s3 = "plds4.dll" fullword wide
+      $s4 = "ssutil3.dll" fullword wide
+      $s5 = "http://skype.com" fullword wide
+      $s6 = "http://Yahoo.com" fullword wide
+      $s7 = "http://hotmail.com" fullword wide
+      $s8 = "http://no-ip.com" fullword wide
+      $s9 = "http://Paltalk.com" fullword wide
+      $s10 = "http://DynDns.com" fullword wide
+      $s11 = "SELECT * FROM moz_logins;" fullword wide
+      $s12 = "ProcessIEPass" fullword ascii
+      $s13 = "pw.dll" fullword ascii
+      $s14 = "http://www.noip.com/" fullword wide
+      $s15 = "\\Opera\\Opera\\wand.dat" fullword wide
+      $s16 = "\\Opera\\Opera\\profile\\wand.dat" fullword wide
+      $s17 = "encryptedPassword" fullword wide
+      $s18 = "\\Google\\Chrome\\User Data\\Default\\Login Data" fullword wide
+      $s19 = "Error with executing non-query: \"" fullword wide
+      $s20 = "lpwstrTargetName" fullword ascii
+   condition:
+      uint16(0) == 0x5a4d and filesize < 100KB and
+      8 of them
+}
+
+/* Super Rules ------------------------------------------------------------- */
+
+rule _NAudio_Mic_0 {
+   meta:
+      description = "njRAT-v0.6.4 - from files NAudio.dll, Mic.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "cd9709bf1c7396f6fe3684b5177fa0890c706ca82e2b98ba58e8d8383632a3c8"
+      hash2 = "fde583027a692d210e8f1f73667fa0037705128ade8bbfbc9b780f019ead6672"
+   strings:
+      $x1 = "jSystem.CodeDom.MemberAttributes, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089fSystem.Drawing.Size," ascii
+      $s2 = " System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3amSystem.Globalization.CultureInfo, mscorlib, V" ascii
+      $s3 = "ersion=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089PADPADP" fullword ascii
+      $s4 = " System.Globalization.CompareInfo" fullword ascii
+      $s5 = "have not implemented not accepting logic yet" fullword wide
+      $s6 = "ResamplerDmoStream.Read: No output data available" fullword wide
+      $s7 = " System.Globalization.CultureInfo" fullword ascii
+      $s8 = "<PrivateImplementationDetails>{4ADC0EA0-0446-48CF-8E3D-7A238EE8575A}" fullword ascii
+      $s9 = "Exporting a track with a missing end track" fullword wide
+      $s10 = "WaveFormatConversionStream was not disposed" fullword wide
+      $s11 = "MP3 File Reader read too much" fullword wide
+      $s12 = "Buffers already queued on play" fullword wide
+      $s13 = "WaveOut device was not closed" fullword wide
+      $s14 = "WaveFileReader was not disposed" fullword wide
+      $s15 = "WaveOutEvent device was not closed" fullword wide
+      $s16 = "AiffFileReader was not disposed" fullword wide
+      $s17 = "Adding a buffer that was already queued on play" fullword wide
+      $s18 = "Invalid SamplesTotalSize vs SamplesFrameSize" fullword wide
+      $s19 = "have not implemented more data available yet" fullword wide
+      $s20 = "length and position mismatch" fullword wide
+   condition:
+      ( uint16(0) == 0x5a4d and filesize < 1000KB and ( 1 of ($x*) and 4 of them )
+      ) or ( all of them )
+}
+
+rule _NAudio_njRAT_Mic_1 {
+   meta:
+      description = "njRAT-v0.6.4 - from files NAudio.dll, njRAT.exe, Mic.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "cd9709bf1c7396f6fe3684b5177fa0890c706ca82e2b98ba58e8d8383632a3c8"
+      hash2 = "fd624aa205517580e83fad7a4ce4d64863e95f62b34ac72647b1974a52822199"
+      hash3 = "fde583027a692d210e8f1f73667fa0037705128ade8bbfbc9b780f019ead6672"
+   strings:
+      $s1 = "CreateSubKey" fullword ascii /* Goodware String - occured 217 times */
+      $s2 = "System.Security" fullword ascii /* Goodware String - occured 1202 times */
+      $s3 = "AddSamples" fullword ascii /* Goodware String - occured 2 times */
+      $s4 = "NAudio.Wave" fullword ascii /* Goodware String - occured 2 times */
+      $s5 = "WaveOut" fullword ascii /* Goodware String - occured 2 times */
+      $s6 = "WaveFormat" fullword ascii /* Goodware String - occured 2 times */
+      $s7 = "NAudio" fullword ascii /* Goodware String - occured 2 times */
+      $s8 = "IWaveProvider" fullword ascii /* Goodware String - occured 2 times */
+      $s9 = "BufferedWaveProvider" fullword ascii /* Goodware String - occured 2 times */
+      $s10 = "b03f5f7f11d50a3a" ascii
+   condition:
+      ( uint16(0) == 0x5a4d and filesize < 3000KB and ( all of them )
+      ) or ( all of them )
+}
+
+rule _NAudio_Mic_cam_2 {
+   meta:
+      description = "njRAT-v0.6.4 - from files NAudio.dll, Mic.dll, cam.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "cd9709bf1c7396f6fe3684b5177fa0890c706ca82e2b98ba58e8d8383632a3c8"
+      hash2 = "fde583027a692d210e8f1f73667fa0037705128ade8bbfbc9b780f019ead6672"
+      hash3 = "b02c56d29447690cdafd8f2f6877d526d1f6efcaae74017719c460d9b3ee38b8"
+   strings:
+      $s1 = "Channel" fullword ascii /* Goodware String - occured 50 times */
+      $s2 = "Source" fullword ascii /* Goodware String - occured 659 times */
+      $s3 = "majorType" fullword ascii /* Goodware String - occured 2 times */
+      $s4 = "IsFormatSupported" fullword ascii /* Goodware String - occured 2 times */
+      $s5 = "formatSize" fullword ascii /* Goodware String - occured 3 times */
+      $s6 = "get_Pan" fullword ascii /* Goodware String - occured 3 times */
+      $s7 = "pNotify" fullword ascii /* Goodware String - occured 4 times */
+   condition:
+      ( uint16(0) == 0x5a4d and filesize < 1000KB and ( all of them )
+      ) or ( all of them )
+}
+
+rule _njRAT_sc2_fm_ch_Mic_cam_3 {
+   meta:
+      description = "njRAT-v0.6.4 - from files njRAT.exe, sc2.dll, fm.dll, ch.dll, Mic.dll, cam.dll"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "fd624aa205517580e83fad7a4ce4d64863e95f62b34ac72647b1974a52822199"
+      hash2 = "d3dcb25f9004f6fce3f3d94406ad6845d996cda2f106a203082aed39a84fac4e"
+      hash3 = "f132324acf09c0562a1cad1288bfb4021bd991659126d21ecb9499938bf6acb3"
+      hash4 = "89a1bbe42cde01ddfe531d69dd6ea6575296096010400cb63cbf4999eca52e52"
+      hash5 = "fde583027a692d210e8f1f73667fa0037705128ade8bbfbc9b780f019ead6672"
+      hash6 = "b02c56d29447690cdafd8f2f6877d526d1f6efcaae74017719c460d9b3ee38b8"
+   strings:
+      $s1 = "TcpClient" fullword ascii /* Goodware String - occured 30 times */
+      $s2 = "Socket" fullword ascii /* Goodware String - occured 140 times */
+      $s3 = "System.Net.Sockets" fullword ascii /* Goodware String - occured 149 times */
+      $s4 = "[endof]" fullword wide
+      $s5 = "LateIndexGet" fullword ascii /* Goodware String - occured 5 times */
+      $s6 = "LateGet" fullword ascii /* Goodware String - occured 5 times */
+   condition:
+      ( uint16(0) == 0x5a4d and filesize < 3000KB and ( all of them )
+      ) or ( all of them )
+}
+
+rule _Stub_njRAT_4 {
+   meta:
+      description = "njRAT-v0.6.4 - from files Stub.manifest, njRAT.exe"
+      author = "Anonymous_Crawlers"
+      reference = "yararulegen"
+      date = "2023-04-09"
+      hash1 = "835a00d6e7c43db49ae7b3fa12559f23c2920b7530f4d3f960fd285b42b1efb5"
+      hash2 = "fd624aa205517580e83fad7a4ce4d64863e95f62b34ac72647b1974a52822199"
+   strings:
+      $s1 = "        <requestedExecutionLevel level=\"asInvoker\" uiAccess=\"false\"/>" fullword ascii
+      $s2 = "  <assemblyIdentity version=\"1.0.0.0\" name=\"MyApplication.app\"/>" fullword ascii
+      $s3 = "  <trustInfo xmlns=\"urn:schemas-microsoft-com:asm.v2\">" fullword ascii
+      $s4 = "      <requestedPrivileges xmlns=\"urn:schemas-microsoft-com:asm.v3\">" fullword ascii
+      $s5 = "  </trustInfo>" fullword ascii
+      $s6 = "      </requestedPrivileges>" fullword ascii
+   condition:
+      ( ( uint16(0) == 0x3f3c or uint16(0) == 0x5a4d ) and filesize < 3000KB and ( all of them )
+      ) or ( all of them )
+}
+
